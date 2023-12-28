@@ -33,6 +33,5 @@ Route::get('/guru/{id}', [GuruController::class, 'show']);
 Route::get('/kelas', [KelasController::class, 'index']);
 Route::get('/kelas/{id}', [KelasController::class, 'show']);
 
-
-Route::get('/jadwal', [JadwalController::class, 'index']);
 Route::get('/jadwal/{jadwal}', [JadwalController::class, 'show']);
+Route::get('/jadwal', [JadwalController::class, 'index']);

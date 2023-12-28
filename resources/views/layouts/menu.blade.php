@@ -62,6 +62,16 @@
                             <div data-i18n="jadwal">jadwal</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('semester.index') }}" class="menu-link">
+                            <div data-i18n="Semester">Semester</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('tahun_akademik.index') }}" class="menu-link">
+                            <div data-i18n="tahun_akademik">Tahun akademik</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endif

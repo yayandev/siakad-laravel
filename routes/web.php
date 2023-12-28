@@ -9,7 +9,9 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\UsersController;
 use App\Models\Guru;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +92,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/store', [JadwalController::class, 'store'])->name('jadwal.store');
             Route::post('/update/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
             Route::post('/destroy/{id}', [JadwalController::class, 'destroy'])->name('jadwal.destroy');
+        });
+
+        Route::prefix('semester')->group(function () {
+            Route::get('/', [SemesterController::class, 'index'])->name('semester.index');
+            Route::post('/store', [SemesterController::class, 'store'])->name('semester.store');
+            Route::post('/update/{id}', [SemesterController::class, 'update'])->name('semester.update');
+            Route::post('/destroy/{id}', [SemesterController::class, 'destroy'])->name('semester.destroy');
+        });
+
+        Route::prefix('tahun_akademik')->group(function () {
+            Route::get('/', [TahunAkademikController::class, 'index'])->name('tahun_akademik.index');
+            Route::post('/store', [TahunAkademikController::class, 'store'])->name('tahun_akademik.store');
+            Route::post('/update/{id}', [TahunAkademikController::class, 'update'])->name('tahun_akademik.update');
+            Route::post('/destroy/{id}', [TahunAkademikController::class, 'destroy'])->name('tahun_akademik.destroy');
         });
     });
 

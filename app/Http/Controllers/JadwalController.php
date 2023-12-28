@@ -40,7 +40,6 @@ class JadwalController extends Controller
 
         // Check if the given combination of id_mapel, id_guru, id_kelas, jam_mulai, jam_selesai, and hari already exists
         $existingSchedules = Jadwal::where([
-            'id_guru' => $request->id_guru,
             'id_kelas' => $request->id_kelas,
             'hari' => $request->hari,
         ])->get();
