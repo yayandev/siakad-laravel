@@ -97,11 +97,6 @@
                 </li>
                 @if (auth()->user()->role == 'siswa' && auth()->user()->status === 'aktif')
                     <li class="menu-item">
-                        <a href="pages-account-settings-notifications.html" class="menu-link">
-                            <div data-i18n="Notifications">Orang tua</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
                         <a href="{{ route('siswa.kelas') }}" class="menu-link">
                             <div data-i18n="Connections">Kelas</div>
                         </a>

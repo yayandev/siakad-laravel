@@ -10,10 +10,6 @@
                 </li>
                 @if ($siswa->user->status === 'aktif')
                     <li class="nav-item">
-                        <a class="nav-link" href="pages-account-settings-notifications.html"><i
-                                class="mdi mdi-account-group mdi-20px me-1"></i>Transkip nilai</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active" href="{{ route('siswa.kelas') }}"><i
                                 class="mdi mdi-link mdi-20px me-1"></i>Kelas</a>
                     </li>
