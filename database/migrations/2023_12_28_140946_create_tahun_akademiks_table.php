@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('tahun_akademiks', function (Blueprint $table) {
             $table->id();
             $table->year('tahun_akademik');
-            $table->unsignedBigInteger('id_semester');
-            $table->foreign('id_semester')->references('id')->on('semesters');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

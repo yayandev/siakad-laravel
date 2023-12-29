@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'tahun akademik')
+@section('title', 'Absensi')
 @section('content')
     <div class="row mb-2">
         <div class="col-lg-12">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="mdi mdi-plus"></i>
-                Add tahun akademik</button>
+                Add Absensi</button>
         </div>
     </div>
     <div class="row mb-2">
@@ -18,26 +18,30 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <h5 class="card-header">Table tahun akademik</h5>
-                @if ($tahun_akademiks->count() > 0)
+                <h5 class="card-header">Table Absensi</h5>
+                @if ($absensi->count() > 0)
                     <div class="table-responsive text-nowrap">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tahun</th>
-                                    <th>Code</th>
+                                    <th>Siswa</th>
+                                    <th>Mapel</th>
+                                    <th>Tahun Akademik</th>
+                                    <th>Semester</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
-                                @foreach ($tahun_akademiks as $item)
+                                @foreach ($absensi as $item)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td>{{ $item->tahun_akademik }}</td>
-                                        <td>{{ $item->code }}</td>
+                                        <td>{{ $item->siswa->name }}</td>
+                                        <td>{{ $item->mapel->mapel }}</td>
+                                        <td>{{ $item->tahun_akademik->tahun_akademik }}</td>
+                                        <td>{{ $item->semester->name }}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -64,7 +68,7 @@
                     </div>
 
                     <div class="mt-3 px-2">
-                        {{ $tahun_akademiks->links('pagination::bootstrap-5') }}
+                        {{ $absensi->links('pagination::bootstrap-5') }}
                     </div>
                 @else
                     <p class="text-center">No data</p>
@@ -108,27 +112,92 @@
 
                 var modal = $(this)
 
-                modal.find('#formDelete').attr('action', '/tahun_akademik/destroy/' + id)
+                modal.find('#formDelete').attr('action', '/absensi/destroy/' + id)
             })
         })
     </script>
 
     <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('tahun_akademik.store') }}" method="POST">
+            <form action="{{ route('absensi.store') }}" method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel1">Add Tahun Akademik</h4>
+                        <h4 class="modal-title" id="exampleModalLabel1">Add Absensi</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row g-2">
-                            <div class="col mb-2">
+                            <div class="col-lg-6 mb-2">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="number" required id="tahun_akademik" name="tahun_akademik"
-                                        class="form-control" placeholder="Enter year" />
-                                    <label for="tahun_akademik">Tahun akademik</label>
+                                    <select name="id_siswa" id="id_siswa" class="form-select" required>
+                                        <option value="" disabled selected>Select Siswa</option>
+                                        @foreach ($siswa as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="id_siswa">Absensi</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <select name="id_mapel" id="id_mapel" class="form-select" required>
+                                        <option value="" disabled selected>Select Mapel</option>
+                                        @foreach ($mapel as $item)
+                                            <option value="{{ $item->id }}">{{ $item->mapel }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="id_mapel">Mata pelajaran</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <select name="id_tahun_akademik" id="id_tahun_akademik" class="form-select" required>
+                                        <option value="" disabled selected>Select tahun akademik</option>
+                                        @foreach ($tahun_akademik as $item)
+                                            <option value="{{ $item->id }}">{{ $item->tahun_akademik }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="id_tahun_akademik">Tahun akademik</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <select name="id_semester" id="id_semester" class="form-select" required>
+                                        <option value="" disabled selected>Select semester</option>
+                                        @foreach ($semester as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="id_semester">Tahun akademik</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="number" class="form-control" name="hadir" id="hadir"
+                                        placeholder="Masukan jumlah hadir">
+                                    <label for="hadir">Jumlah hadir</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="number" class="form-control" name="alpa" id="alpa"
+                                        placeholder="Masukan jumlah alpa">
+                                    <label for="alpa">Jumlah alpa</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="number" class="form-control" name="sakit" id="sakit"
+                                        placeholder="Masukan jumlah sakit">
+                                    <label for="sakit">Jumlah sakit</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="number" class="form-control" name="ijin" id="ijin"
+                                        placeholder="Masukan jumlah ijin">
+                                    <label for="ijin">Jumlah ijin</label>
                                 </div>
                             </div>
                         </div>
@@ -157,9 +226,9 @@
                         <div class="row g-2">
                             <div class="col mb-2">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="number" required id="update_tahun_akademik" name="tahun_akademik"
+                                    <input type="number" required id="update_absensi" name="absensi"
                                         class="form-control" placeholder="Enter year" />
-                                    <label for="update_tahun_akademik">Tahun akademik</label>
+                                    <label for="update_absensi">Absensi</label>
                                 </div>
                             </div>
 
@@ -180,12 +249,12 @@
         $(document).ready(function() {
             $('#editModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
-                var tahun_akademik = $(e.relatedTarget).data('tahun_akademik');
+                var absensi = $(e.relatedTarget).data('absensi');
                 var id_semester = $(e.relatedTarget).data('id_semester');
 
-                $('#formEdit').attr('action', '/tahun_akademik/update/' + id);
+                $('#formEdit').attr('action', '/absensi/update/' + id);
 
-                $('#update_tahun_akademik').val(tahun_akademik);
+                $('#update_absensi').val(absensi);
 
             })
         })

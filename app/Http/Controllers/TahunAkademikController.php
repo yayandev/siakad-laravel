@@ -10,13 +10,12 @@ class TahunAkademikController extends Controller
 {
     public function index(Request $request)
     {
-        $semesters = Semester::all();
         if ($request->has('search')) {
             $tahun_akademiks = TahunAkademik::where('tahun_akademik', 'like', '%' . $request->search . '%')->paginate(4);
-            return view('tahun_akademik.index', compact('tahun_akademiks', 'semesters'));
+            return view('tahun_akademik.index', compact('tahun_akademiks'));
         }
         $tahun_akademiks = TahunAkademik::paginate(4);
-        return view('tahun_akademik.index', compact('tahun_akademiks', 'semesters'));
+        return view('tahun_akademik.index', compact('tahun_akademiks'));
     }
 
     public function destroy($id)
@@ -35,19 +34,20 @@ class TahunAkademikController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tahun_akademik' => 'required',
-            'id_semester' => 'required',
+            'tahun_akademik' => 'required|unique:tahun_akademiks',
         ]);
 
-        $tahun_akademiks = TahunAkademik::where('id_semester', $request->id_semester)->where('tahun_akademik', $request->tahun_akademik)->first();
+        // create code unik & random
 
-        if ($tahun_akademiks) {
-            return redirect('/tahun_akademik')->with(['error' => 'Tahun Akademik Sudah Ada']);
+        $code = 'TA' . random_int(1000, 9999);
+
+        if (TahunAkademik::where('code', $code)->exists()) {
+            $code = 'TA' . random_int(1000, 9999);
         }
 
         $tahun_akademik = TahunAkademik::create([
             'tahun_akademik' => $request->tahun_akademik,
-            'id_semester' => $request->id_semester
+            'code' => $code
         ]);
 
         if (!$tahun_akademik) {
@@ -61,7 +61,6 @@ class TahunAkademikController extends Controller
     {
         $request->validate([
             'tahun_akademik' => 'required',
-            'id_semester' => 'required',
         ]);
 
         $tahun_akademik = TahunAkademik::find($id);
@@ -72,7 +71,6 @@ class TahunAkademikController extends Controller
 
         $tahun_akademik->update([
             'tahun_akademik' => $request->tahun_akademik,
-            'id_semester' => $request->id_semester
         ]);
 
         return redirect('/tahun_akademik')->with(['success' => 'Tahun Akademik Berhasil Di Update']);

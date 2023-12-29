@@ -72,6 +72,11 @@
                             <div data-i18n="tahun_akademik">Tahun akademik</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('absensi.index') }}" class="menu-link">
+                            <div data-i18n="absensi">Absensi</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endif

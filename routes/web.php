@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -106,6 +107,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/store', [TahunAkademikController::class, 'store'])->name('tahun_akademik.store');
             Route::post('/update/{id}', [TahunAkademikController::class, 'update'])->name('tahun_akademik.update');
             Route::post('/destroy/{id}', [TahunAkademikController::class, 'destroy'])->name('tahun_akademik.destroy');
+        });
+
+        Route::prefix('absensi')->group(function () {
+            Route::get('/', [AbsensiController::class, 'index'])->name('absensi.index');
+            Route::post('/store', [AbsensiController::class, 'store'])->name('absensi.store');
+            Route::post('/update/{id}', [AbsensiController::class, 'update'])->name('absensi.update');
+            Route::post('/destroy/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');
         });
     });
 
