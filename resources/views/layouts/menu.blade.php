@@ -79,6 +79,25 @@
                     </li>
                 </ul>
             </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-book"></i>
+                    <div data-i18n="data master">Artikel</div>
+                </a>
+
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('categories.index') }}" class="menu-link">
+                            <div data-i18n="categories">categories</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('posts.index') }}" class="menu-link">
+                            <div data-i18n="posts">Posts</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endif
         @if (auth()->user()->role == 'siswa')
             <li class="menu-item">

@@ -5,11 +5,13 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAkademikController;
@@ -114,6 +116,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/store', [AbsensiController::class, 'store'])->name('absensi.store');
             Route::post('/update/{id}', [AbsensiController::class, 'update'])->name('absensi.update');
             Route::post('/destroy/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');
+        });
+
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+            Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+            Route::post('/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+            Route::post('/destroy/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+        });
+
+        Route::prefix('posts')->group(function () {
+            Route::get('/', [PostsController::class, 'index'])->name('posts.index');
+            Route::post('/store', [PostsController::class, 'store'])->name('posts.store');
+            Route::post('/update/{id}', [PostsController::class, 'update'])->name('posts.update');
+            Route::post('/destroy/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
         });
     });
 
