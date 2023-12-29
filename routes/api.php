@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\GuruController;
 use App\Http\Controllers\Api\JadwalController;
 use App\Http\Controllers\Api\KelasController;
+use App\Http\Controllers\Api\PostsController;
 use App\Http\Controllers\Api\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,6 @@ Route::get('/kelas/{id}', [KelasController::class, 'show']);
 
 Route::get('/jadwal/{jadwal}', [JadwalController::class, 'show']);
 Route::get('/jadwal', [JadwalController::class, 'index']);
+
+Route::get('/posts', [PostsController::class, 'index']);
+Route::get('/posts/{slug}', [PostsController::class, 'show']);
