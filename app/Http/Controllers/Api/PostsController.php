@@ -25,4 +25,14 @@ class PostsController extends Controller
             'data' => $posts
         ]);
     }
+
+    public function destroy($id)
+    {
+
+        $posts = Posts::find($id);
+
+        if (!$posts) {
+            return redirect('/posts')->with(['error' => 'Posts not found!']);
+        }
+    }
 }
