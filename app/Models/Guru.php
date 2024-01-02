@@ -15,4 +15,9 @@ class Guru extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'id_guru');
+    }
 }

@@ -97,10 +97,32 @@
                         <div class="row mt-2 gy-4">
                             <div class="col-md-12">
                                 <div class="form-floating form-floating-outline">
-                                    <input class="form-control" value="" type="text" required id="nameUpdate"
-                                        name="name" autofocus />
-                                    <label for="nameUpdate">name</label>
+                                    <input class="form-control" type="text" required id="titleUpdate" name="title"
+                                        autofocus />
+                                    <label for="titleUpdate">title</label>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <select name="id_category" id="categoryUpdate" class="form-select" required>
+                                        <option value="" disabled selected>Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="categoryUpdate">category</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="file" id="imageUpdate" name="image" class="form-control"
+                                        accept="image/*">
+                                    <label for="imageUpdate">image</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea name="body" id="contentUpdate" rows="5" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -118,12 +140,22 @@
     <script>
         $(document).ready(function() {
             $('#editModal').on('show.bs.modal', function(e) {
-                var name = $(e.relatedTarget).data('name');
                 var id = $(e.relatedTarget).data('id');
 
 
                 $('#formEdit').attr('action', '/posts/update/' + id);
-                $('#nameUpdate').val(name);
+
+                $.ajax({
+                    url: '/api/posts/' + id,
+                    type: 'GET',
+                    success: function(response) {
+                        const data = response.data;
+
+                        $('#titleUpdate').val(data.title);
+                        $('#categoryUpdate').val(data.id_category);
+                        $('#contentUpdate').val(data.body);
+                    }
+                })
             })
         })
     </script>
@@ -231,4 +263,15 @@
                 console.error(error);
             });
     </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#contentUpdate'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 @endsection

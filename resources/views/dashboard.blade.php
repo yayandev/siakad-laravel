@@ -9,11 +9,11 @@
                 <div class="card-body">
                     <div class="row align-items-center gy-3 text-center">
                         <div class="col-md-4">
-                            <img src="/assets/img/logo/1.png" class="img-fluid" alt="">
+                            <img src="{{ $sekolah->logo }}" class="img-fluid" alt="">
                         </div>
                         <div class="col-md-8">
                             <h3>Selamat datang <strong>{{ auth()->user()->name }}</strong> di Sistem Informasi
-                                Akademik!
+                                Akademik {{ $sekolah->name }}!
                             </h3>
                         </div>
                     </div>

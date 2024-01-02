@@ -10,7 +10,7 @@ class GuruController extends Controller
 {
     public function index()
     {
-        $gurus = Guru::paginate(4);
+        $gurus = Guru::with('user:id,name,profile_picture', 'jadwal')->get();
 
         return response()->json([
             'data' => $gurus,

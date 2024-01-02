@@ -17,9 +17,9 @@ class PostsController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show($id)
     {
-        $posts = Posts::where('slug', $slug)->with('author:id,name,profile_picture', 'categories:id,name')->first();
+        $posts = Posts::where('id', $id)->with('author:id,name,profile_picture', 'categories:id,name')->first();
 
         return response()->json([
             'data' => $posts

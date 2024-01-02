@@ -12,6 +12,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAkademikController;
@@ -130,6 +131,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/store', [PostsController::class, 'store'])->name('posts.store');
             Route::post('/update/{id}', [PostsController::class, 'update'])->name('posts.update');
             Route::post('/destroy/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
+        });
+
+        Route::prefix('sekolah')->group(function () {
+            Route::get('/logo', [SekolahController::class, 'changeLogo'])->name('sekolah.logo');
+            Route::post('/update-logo', [SekolahController::class, 'storeLogo'])->name('sekolah.update-logo');
+            Route::get('/profile', [SekolahController::class, 'profileSekolah'])->name('sekolah.profile');
+            Route::post('/update-profile', [SekolahController::class, 'updateProfile'])->name('sekolah.update-profile');
         });
     });
 

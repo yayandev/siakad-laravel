@@ -38,4 +38,4 @@ Route::get('/jadwal/{jadwal}', [JadwalController::class, 'show']);
 Route::get('/jadwal', [JadwalController::class, 'index']);
 
 Route::get('/posts', [PostsController::class, 'index']);
-Route::get('/posts/{slug}', [PostsController::class, 'show']);
+Route::get('/posts/{id}', [PostsController::class, 'show']);

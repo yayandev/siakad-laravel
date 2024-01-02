@@ -2,9 +2,9 @@
     <div class="app-brand demo">
         <a href="{{ route('dashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo me-1">
-                <img src="/assets/img/logo/1.png" width="40" alt="">
+                <img src="{{ $sekolah->logo }}" width="40" alt="">
             </span>
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">SIAKAD</span>
+            <span class="app-brand-text demo menu-text fw-semibold ms-2">{{ $sekolah->name }}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -94,6 +94,25 @@
                     <li class="menu-item">
                         <a href="{{ route('posts.index') }}" class="menu-link">
                             <div data-i18n="posts">Posts</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-school"></i>
+                    <div data-i18n="data master">Profile Sekolah</div>
+                </a>
+
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('sekolah.profile') }}" class="menu-link">
+                            <div data-i18n="profile">Profile</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('sekolah.logo') }}" class="menu-link">
+                            <div data-i18n="logo">Logo</div>
                         </a>
                     </li>
                 </ul>

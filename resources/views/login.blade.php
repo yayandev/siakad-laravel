@@ -58,15 +58,14 @@
                     <div class="app-brand justify-content-center mt-5">
                         <a href="index.html" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">
-                                <img src="/assets/img/logo/1.png" width="100" alt="">
+                                <img src="{{ $sekolah->logo }}" width="100" alt="">
                             </span>
-                            {{-- <span class="app-brand-text demo text-heading fw-semibold">SIAKAD</span> --}}
                         </a>
                     </div>
                     <!-- /Logo -->
 
                     <div class="card-body mt-2">
-                        <h4 class="mb-2">Welcome to SIAKAD! 👋</h4>
+                        <h4 class="mb-2">Welcome to {{ $sekolah->name }}! 👋</h4>
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                         @if (Session::get('error'))
